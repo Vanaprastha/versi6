@@ -10,31 +10,35 @@ interface SDGData {
   [key: string]: any;
 }
 
-// Hitung skor numerik (semakin kecil makin baik)
+// 🔢 Fungsi untuk skor numerik (semakin kecil makin baik)
 function numericScore(value: number, max: number = 50): number {
-  if (typeof value !== "number") return 0;
+  if (typeof value !== "number" || isNaN(value)) return 0;
   return Math.max(0, (1 - value / max)) * 100;
 }
 
-// Hitung skor kategori berdasarkan arti kalimat
-function categoryScore(key: string, value: string): number {
-  if (!value) return 0;
-  const v = value.toLowerCase().trim();
+// 🔤 Fungsi untuk skor kategori (aman dari tipe non-string)
+function categoryScore(key: string, value: any): number {
+  if (value === null || value === undefined) return 0;
+  const v = String(value).toLowerCase().trim(); // pastikan selalu string
 
   switch (key) {
-    case "r711jk2": // Kejadian kearawanan pangan
+    // Kejadian Kearawanan Pangan
+    case "r711jk2":
       if (v.includes("tidak ada")) return 100;
       if (v.includes("ada")) return 0;
       return 50;
 
-    case "r515c": // Penggalakan pupuk organik
+    // Penggalakan penggunaan pupuk organik
+    case "r515c":
       if (v.includes("tidak ada")) return 0;
       if (v.includes("ada")) return 100;
       return 50;
 
-    case "r403c2": // Akses jalan pertanian
+    // Akses jalan pertanian
+    case "r403c2":
       if (v.includes("sep sepanjang tahun")) return 100;
       if (v.includes("kecuali saat hujan")) return 80;
+      if (v.includes("sep")) return 100; // fallback: kalau ada kata 'sep...' = sepanjang tahun
       return 50;
 
     default:
@@ -42,6 +46,7 @@ function categoryScore(key: string, value: string): number {
   }
 }
 
+// 🔍 Hitung rata-rata keberhasilan SDG 2
 async function calculateSdg2Success(data: SDGData[]): Promise<number> {
   if (!data || data.length === 0) return 0;
 
@@ -49,14 +54,14 @@ async function calculateSdg2Success(data: SDGData[]): Promise<number> {
   for (const row of data) {
     const scores: number[] = [];
 
-    // 🔢 Numerik
+    // 🔢 Kolom numerik
     scores.push(numericScore(row["r709"])); // jumlah penderita gizi buruk
-    scores.push(numericScore(row["r603"])); // luas lahan terdampak bencana
+    scores.push(numericScore(row["r603"])); // luas areal pertanian terdampak bencana
 
-    // 🔤 Kategori
-    scores.push(categoryScore("r711jk2", row["r711jk2"]));
-    scores.push(categoryScore("r515c", row["r515c"]));
-    scores.push(categoryScore("r403c2", row["r403c2"]));
+    // 🔤 Kolom kategori
+    scores.push(categoryScore("r711jk2", row["r711jk2"])); // kearawanan pangan
+    scores.push(categoryScore("r515c", row["r515c"])); // pupuk organik
+    scores.push(categoryScore("r403c2", row["r403c2"])); // akses jalan pertanian
 
     const validScores = scores.filter((s) => !isNaN(s));
     if (validScores.length > 0) {
@@ -65,10 +70,15 @@ async function calculateSdg2Success(data: SDGData[]): Promise<number> {
     }
   }
 
-  const overall = total.reduce((a, b) => a + b, 0) / total.length;
+  const overall =
+    total.length > 0
+      ? total.reduce((a, b) => a + b, 0) / total.length
+      : 0;
+
   return parseFloat(overall.toFixed(2));
 }
 
+// 🧩 Endpoint utama
 export async function GET(): Promise<Response> {
   try {
     const { data: rows, error } = await supabase.from("sdgs_2").select("*");
@@ -84,6 +94,7 @@ export async function GET(): Promise<Response> {
       { status: 200 }
     );
   } catch (err: any) {
+    console.error("Error in sdg-success-2:", err.message);
     return new Response(JSON.stringify({ error: err.message }), { status: 500 });
   }
 }
