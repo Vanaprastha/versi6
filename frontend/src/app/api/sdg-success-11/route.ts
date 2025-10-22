@@ -1,17 +1,12 @@
 export async function GET(): Promise<Response> {
   try {
-    // 🌐 Ambil base URL langsung dari environment
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
-    if (!baseUrl)
-      throw new Error("Environment variable NEXT_PUBLIC_SITE_URL tidak ditemukan");
-
-    // 🔗 Fetch data JSON langsung dari endpoint publik kamu
-    const res = await fetch(`${baseUrl}/api/sdgs11`, { cache: "no-store" });
+    // 🌐 Ambil langsung dari endpoint publik
+    const res = await fetch("https://versi6.vercel.app/api/sdgs11", { cache: "no-store" });
     if (!res.ok)
-      throw new Error(`Gagal mengambil data SDG 11 dari ${baseUrl}: ${res.status}`);
+      throw new Error(`Gagal mengambil data SDG 11: ${res.status}`);
     const data = await res.json();
 
-    // 🎯 Fungsi scoring kategori
+    // 🎯 Fungsi penilaian kategori
     function categoryScore(key: string, value: any): number {
       if (!value) return 0;
       const v = String(value).toLowerCase();
