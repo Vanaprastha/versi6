@@ -31,7 +31,7 @@ export default function SDG11Page() {
   // Ringkasan Cards
   const summary = {
     permukimanKumuh: data.filter((d) => d["Keberadaan permukiman kumuh (sanitasi lingkungan buruk, bangunan padat dan sebagian besar tidak layak huni)"] === "ada").length,
-    sistemPeringatan: data.filter((d) => d["Sistem Peringatan Dini Bencana alam"] === "ada").length,
+    sistemPeringatan: data.filter((d) => d["Fasilitas sistem peringatan dini bencana alam"] === "ada").length,  // Ubah kolom di sini
     rambuEvakuasi: data.filter((d) => d["Fasilitas Rambu–rambu dan jalur evakuasi bencana"] === "ada").length,
     desaTangguh: data.filter((d) => d["Status Desa Tangguh Bencana"] === "termasuk").length,
     programLingkungan: data.filter((d) => d["Keberadaan program pengelolaan lingkungan perumahan desa/kelurahan"] === "ada").length,
@@ -125,7 +125,7 @@ export default function SDG11Page() {
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Sistem Peringatan (ada)</h4>
-          <p className="text-xl font-bold text-amber-400">{summary.sistemPeringatan}</p>
+          <p className="text-xl font-bold text-amber-400">{summary.sistemPeringatan}</p> {/* Ubah kolom di sini */}
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Rambu Evakuasi (ada)</h4>
@@ -146,7 +146,7 @@ export default function SDG11Page() {
         <h3 className="text-lg font-semibold mb-4">Indikator dari Dataset</h3>
         <div className="grid grid-cols-2 gap-6">
           {renderPieChart("Keberadaan permukiman kumuh (sanitasi lingkungan buruk, bangunan padat dan sebagian besar tidak layak huni)")}
-          {renderPieChart("Sistem Peringatan Dini Bencana alam")}
+          {renderPieChart("Fasilitas sistem peringatan dini bencana alam")} {/* Ubah kolom di sini */}
           {renderPieChart("Fasilitas Rambu–rambu dan jalur evakuasi bencana")}
           {renderPieChart("Status Desa Tangguh Bencana")}
           {renderPieChart("Keberadaan program pengelolaan lingkungan perumahan desa/kelurahan")}
@@ -160,6 +160,7 @@ export default function SDG11Page() {
           {insight || "sedang memberikan insight berdasarkan data...."}
         </p>
       </div>
-</div>
+    </div>
   );
 }
+
