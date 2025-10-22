@@ -11,22 +11,6 @@ interface SdgSuccessData {
 
 const sdgTitles: { [key: number]: string } = {
   1: "Tanpa Kemiskinan",
-  2: "Tanpa Kelaparan",
-  3: "Kesehatan yang Baik",
-  4: "Pendidikan Berkualitas",
-  5: "Kesetaraan Gender",
-  6: "Air Bersih & Sanitasi",
-  7: "Energi Bersih",
-  8: "Pekerjaan Layak",
-  9: "Industri, Inovasi",
-  10: "Berkurangnya Kesenjangan",
-  11: "Kota & Pemukiman",
-  12: "Konsumsi Bertanggung Jawab",
-  13: "Aksi Iklim",
-  14: "Ekosistem Lautan",
-  15: "Ekosistem Daratan",
-  16: "Institusi Kuat",
-  17: "Kemitraan",
 };
 
 export default function Dashboard() {
@@ -37,29 +21,23 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchSdgSuccess() {
       try {
-        const response = await Promise.all(Array.from({ length: 17 }, (_, i) => fetch(`/api/sdg-success-${i+1}`).then(r=>r.json())));
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        const response = await fetch("/api/sdg-success");
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data: SdgSuccessData[] = await response.json();
-        setSdgData((data as any[]).map((d:any)=>({ goalNo: d.goalNo, successPercentage: d.successPercentage })));
+        setSdgData(data);
       } catch (e: any) {
         setError(e.message);
       } finally {
         setLoading(false);
       }
     }
-
     fetchSdgSuccess();
   }, []);
 
-  // ✅ Ubah bagian loading di sini
   if (loading)
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-3xl font-bold text-white animate-pulse">
-          Loading SDGs...
-        </p>
+        <p className="text-3xl font-bold text-white animate-pulse">Loading SDGs...</p>
       </div>
     );
 
@@ -88,4 +66,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
