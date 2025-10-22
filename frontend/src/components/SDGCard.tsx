@@ -52,7 +52,7 @@ const SDG_ICONS: Record<number, JSX.Element> = {
 
 export default function SDGCard({ goalNo, title, successPercentage }: Props) {
   const base = SDG_COLORS[goalNo] ?? "#10b981";
-  const bg = `linear-gradient(135deg, ${base}20, ${base}40)`;
+  const bg = `linear-gradient(135deg, ${base}15, ${base}35)`;
   const border = base + "55";
   const icon = SDG_ICONS[goalNo];
 
@@ -61,19 +61,20 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
       className="relative p-4 rounded-2xl border backdrop-blur-xl shadow hover:shadow-lg cursor-pointer transition"
       style={{ background: bg, borderColor: border }}
     >
-      {/* Ikon di tengah kanan */}
-      <div className="absolute top-1/2 right-3 -translate-y-1/2 text-white/90">
+      {/* Icon di pojok kanan atas */}
+      <div className="absolute top-3 right-3 text-white/90">
         {icon}
       </div>
 
-      <h3 className="font-semibold drop-shadow-md mb-2 pr-8 text-white">
+      {/* Judul SDG */}
+      <h3 className="font-semibold text-white drop-shadow-md mb-3 pr-10">
         SDG {goalNo}: {title}
       </h3>
 
-      {/* Progress bar section */}
-      <div className="mt-3 mb-1 w-full bg-white/20 h-2 rounded-full overflow-hidden">
+      {/* Progress bar container */}
+      <div className="mt-2 mb-1 w-full bg-white/20 h-2 rounded-full overflow-hidden">
         <div
-          className="h-2 rounded-full transition-all duration-700"
+          className="h-2 rounded-full transition-all duration-700 ease-in-out"
           style={{
             width: `${successPercentage}%`,
             backgroundColor: base,
@@ -81,9 +82,12 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
         ></div>
       </div>
 
-      <p className="text-sm text-gray-100 pr-8 mt-1">
+      {/* Persentase keberhasilan */}
+      <p className="text-sm text-gray-100 mt-2 pr-10">
         Keberhasilan:{" "}
-        <span className="font-semibold">{successPercentage.toFixed(1)}%</span>
+        <span className="font-semibold text-white">
+          {successPercentage.toFixed(1)}%
+        </span>
       </p>
     </div>
   );
