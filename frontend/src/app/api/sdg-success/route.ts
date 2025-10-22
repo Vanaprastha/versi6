@@ -3,7 +3,7 @@ export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
     const base = `${url.protocol}//${url.host}`;
 
-    const [res1, res2, res3, res4, res5, res6, res7] = await Promise.all([
+    const [res1, res2, res3, res4, res5, res6, res7, res8] = await Promise.all([
       fetch(`${base}/api/sdg-success-1`, { cache: "no-store" }),
       fetch(`${base}/api/sdg-success-2`, { cache: "no-store" }),
       fetch(`${base}/api/sdg-success-3`, { cache: "no-store" }),
@@ -11,6 +11,7 @@ export async function GET(request: Request): Promise<Response> {
       fetch(`${base}/api/sdg-success-5`, { cache: "no-store" }),
       fetch(`${base}/api/sdg-success-6`, { cache: "no-store" }),
       fetch(`${base}/api/sdg-success-7`, { cache: "no-store" }),
+      fetch(`${base}/api/sdg-success-8`, { cache: "no-store" }),
     ]);
 
     const sdg1 = await res1.json();
@@ -20,8 +21,9 @@ export async function GET(request: Request): Promise<Response> {
     const sdg5 = await res5.json();
     const sdg6 = await res6.json();
     const sdg7 = await res7.json();
+    const sdg8 = await res8.json();
 
-    const result = [sdg1, sdg2, sdg3, sdg4, sdg5, sdg6, sdg7];
+    const result = [sdg1, sdg2, sdg3, sdg4, sdg5, sdg6, sdg7, sdg8];
 
     return new Response(JSON.stringify(result), { status: 200 });
   } catch (err: any) {
