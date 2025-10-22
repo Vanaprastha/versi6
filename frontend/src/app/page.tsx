@@ -37,12 +37,12 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchSdgSuccess() {
       try {
-        const response = await fetch("/api/sdg-success");
+        const response = await Promise.all(Array.from({ length: 17 }, (_, i) => fetch(`/api/sdg-success-${i+1}`).then(r=>r.json())));
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data: SdgSuccessData[] = await response.json();
-        setSdgData(data);
+        setSdgData((data as any[]).map((d:any)=>({ goalNo: d.goalNo, successPercentage: d.successPercentage })));
       } catch (e: any) {
         setError(e.message);
       } finally {
