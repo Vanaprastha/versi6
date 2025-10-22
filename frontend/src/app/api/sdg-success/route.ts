@@ -1,23 +1,25 @@
 export async function GET(request: Request): Promise<Response> {
   try {
-    // Ambil origin (contoh: https://versi6.vercel.app)
+    // Ambil origin dari request (mis. https://versi6.vercel.app)
     const url = new URL(request.url);
     const base = `${url.protocol}//${url.host}`;
 
-    // 🔗 Panggil endpoint SDG 1, SDG 2, dan SDG 3 secara paralel
-    const [res1, res2, res3] = await Promise.all([
+    // 🔗 Panggil semua endpoint SDG 1–4 secara paralel
+    const [res1, res2, res3, res4] = await Promise.all([
       fetch(`${base}/api/sdg-success-1`, { cache: "no-store" }),
       fetch(`${base}/api/sdg-success-2`, { cache: "no-store" }),
       fetch(`${base}/api/sdg-success-3`, { cache: "no-store" }),
+      fetch(`${base}/api/sdg-success-4`, { cache: "no-store" }),
     ]);
 
     // 🧩 Parse hasil JSON dari masing-masing SDG
     const sdg1 = await res1.json();
     const sdg2 = await res2.json();
     const sdg3 = await res3.json();
+    const sdg4 = await res4.json();
 
-    // 📦 Gabungkan semua hasil ke dalam satu array
-    const result = [sdg1, sdg2, sdg3];
+    // 📦 Gabungkan hasil ke dalam satu array
+    const result = [sdg1, sdg2, sdg3, sdg4];
 
     // 🔁 Kembalikan response JSON
     return new Response(JSON.stringify(result), { status: 200 });

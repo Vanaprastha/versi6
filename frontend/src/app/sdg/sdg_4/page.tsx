@@ -14,7 +14,7 @@ export default function SDG4Page() {
     fetch("/api/insight?sdg=4")
       .then(res => res.json())
       .then(d => setInsight(d.insight || "sedang memberikan insight berdasarkan data...."))
-      .catch(err => setInsight("sedang memberikan insight berdasarkan data...."));
+      .catch(() => setInsight("sedang memberikan insight berdasarkan data...."));
   }, []);
 
   const [data, setData] = useState<any[]>([]);
@@ -26,7 +26,7 @@ export default function SDG4Page() {
       .catch((err) => console.error(err));
   }, []);
 
-  const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#eab308"]; // tanpa merah, merah khusus "tidak ada"
+  const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#eab308"];
 
   // Tooltip custom untuk bar chart
   const CustomTooltipBar = ({ active, payload, label }: any) => {
@@ -113,10 +113,9 @@ export default function SDG4Page() {
             const counts: Record<string, number> = {};
             data.forEach((row) => {
               const val = String(row[key]);
-              if (val) {
-                counts[val] = (counts[val] || 0) + 1;
-              }
+              if (val) counts[val] = (counts[val] || 0) + 1;
             });
+
             const pieData = Object.entries(counts).map(([name, value]) => ({
               name,
               value,
@@ -139,17 +138,12 @@ export default function SDG4Page() {
                         {pieData.map((entry, i) => {
                           const fillColor =
                             entry.name.toLowerCase().includes("tidak ada")
-                              ? "#ef4444" // merah khusus "tidak ada"
+                              ? "#ef4444"
                               : COLORS[i % COLORS.length];
                           return <Cell key={i} fill={fillColor} />;
                         })}
                       </Pie>
-                      <Legend
-                        verticalAlign="bottom"
-                        layout="horizontal"
-                        align="center"
-                        wrapperStyle={{ marginTop: "20px" }}
-                      />
+                      <Legend verticalAlign="bottom" layout="horizontal" align="center" />
                       <Tooltip content={<CustomTooltipPie />} />
                     </PieChart>
                   </ResponsiveContainer>
@@ -159,7 +153,7 @@ export default function SDG4Page() {
           })}
         </div>
       </div>
-    
+
       {/* Insight Card */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg mt-4">
         <h3 className="text-lg font-semibold mb-2 text-blue-400">Insight Otomatis</h3>
@@ -167,6 +161,7 @@ export default function SDG4Page() {
           {insight || "sedang memberikan insight berdasarkan data...."}
         </p>
       </div>
-</div>
+    </div>
   );
 }
+
