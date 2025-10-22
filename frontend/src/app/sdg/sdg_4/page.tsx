@@ -26,7 +26,7 @@ export default function SDG4Page() {
       .catch((err) => console.error(err));
   }, []);
 
-  const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#eab308"];
+  const COLORS = ["#22c55e", "#3b82f6", "#f59e0b", "#eab308", "#ef4444"];
 
   // Tooltip custom untuk bar chart
   const CustomTooltipBar = ({ active, payload, label }: any) => {
@@ -88,11 +88,12 @@ export default function SDG4Page() {
               <Tooltip content={<CustomTooltipBar />} />
               <Legend />
               <Bar
-                dataKey="Lembaga_Keterampilan_Komputer"
+                dataKey="Jumlah Lembaga Keterampilan Komputer"
+                name="Jumlah Lembaga Keterampilan Komputer"
                 fill="#3b82f6"
                 radius={[6, 6, 0, 0]}
               >
-                <LabelList dataKey="Lembaga_Keterampilan_Komputer" position="top" fill="#fff" />
+                <LabelList dataKey="Jumlah Lembaga Keterampilan Komputer" position="top" fill="#fff" />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
@@ -104,12 +105,11 @@ export default function SDG4Page() {
         <h3 className="text-lg font-semibold mb-4">Indikator Kualitatif Pendidikan</h3>
         <div className="grid grid-cols-2 gap-6">
           {[
-            "Aksesibilitas_SD_Terdekat",
-            "Jarak_PAUD_Terdekat",
-            "Program_Pendidikan_Keaksaraan",
-            "Program_Pendidikan_Paket_A/B/C"
+            "Akses ke SD Terdekat",
+            "Jarak ke PAUD Terdekat",
+            "Ketersediaan Program Keaksaraan",
+            "Ketersediaan Program Paket A/B/C"
           ].map((key, idx) => {
-            // Hitung jumlah per kategori
             const counts: Record<string, number> = {};
             data.forEach((row) => {
               const val = String(row[key]);
