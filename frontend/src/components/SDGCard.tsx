@@ -1,4 +1,21 @@
-import { HeartPulse, Users, Droplets, Leaf, Factory, Building2, Handshake, Globe, Trees, GraduationCap, BriefcaseBusiness, Shield, Sparkles, Recycle, Sun, Waves } from "lucide-react";
+import {
+  HeartPulse,
+  Users,
+  Droplets,
+  Leaf,
+  Factory,
+  Building2,
+  Handshake,
+  Globe,
+  Trees,
+  GraduationCap,
+  BriefcaseBusiness,
+  Shield,
+  Sparkles,
+  Recycle,
+  Sun,
+  Waves,
+} from "lucide-react";
 
 type Props = {
   goalNo: number;
@@ -49,12 +66,24 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
         {icon}
       </div>
 
-      <h3 className="font-semibold drop-shadow-md mb-2 pr-8">
+      <h3 className="font-semibold drop-shadow-md mb-2 pr-8 text-white">
         SDG {goalNo}: {title}
       </h3>
 
-      <p className="text-sm text-gray-200 pr-8">
-        Keberhasilan: {successPercentage}%
+      {/* Progress bar section */}
+      <div className="mt-3 mb-1 w-full bg-white/20 h-2 rounded-full overflow-hidden">
+        <div
+          className="h-2 rounded-full transition-all duration-700"
+          style={{
+            width: `${successPercentage}%`,
+            backgroundColor: base,
+          }}
+        ></div>
+      </div>
+
+      <p className="text-sm text-gray-100 pr-8 mt-1">
+        Keberhasilan:{" "}
+        <span className="font-semibold">{successPercentage.toFixed(1)}%</span>
       </p>
     </div>
   );
