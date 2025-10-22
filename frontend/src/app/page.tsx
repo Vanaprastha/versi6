@@ -13,22 +13,23 @@ interface SdgSuccessData {
 const sdgTitles: { [key: number]: string } = {
   1: "Tanpa Kemiskinan",
   2: "Tanpa Kelaparan",
-  3: "Kehidupan Sehat dan Sejahtera",
+  3: "Kesehatan yang Baik",
   4: "Pendidikan Berkualitas",
   5: "Kesetaraan Gender",
-  6: "Air Bersih dan Sanitasi Layak",
-  7: "Energi Bersih dan Terjangkau",
-  8: "Pekerjaan Layak dan Pertumbuhan Ekonomi",
-  9: "Industri, Inovasi, dan Infrastruktur",
+  6: "Air Bersih & Sanitasi",
+  7: "Energi Bersih & Terjangkau",
+  8: "Pekerjaan Layak & Pertumbuhan Ekonomi",
+  9: "Industri, Inovasi & Infrastruktur",
   10: "Berkurangnya Kesenjangan",
-  11: "Kota dan Permukiman yang Berkelanjutan",
-  12: "Konsumsi dan Produksi yang Bertanggung Jawab",
-  13: "Penanganan Perubahan Iklim",
-  14: "Ekosistem Lautan",
-  15: "Ekosistem Daratan",
-  16: "Perdamaian, Keadilan, dan Kelembagaan yang Tangguh",
-  17: "Kemitraan untuk Mencapai Tujuan",
+  11: "Kota & Pemukiman Berkelanjutan",
+  12: "Konsumsi & Produksi Bertanggung Jawab",
+  13: "Aksi Terhadap Perubahan Iklim",
+  14: "Ekosistem Lautan yang Sehat",
+  15: "Ekosistem Daratan yang Sehat",
+  16: "Institusi & Peradilan Kuat",
+  17: "Kemitraan untuk Tujuan",
 };
+
 
 export default function Dashboard() {
   const [sdgData, setSdgData] = useState<SdgSuccessData[]>([]);
