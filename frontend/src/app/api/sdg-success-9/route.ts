@@ -1,10 +1,16 @@
 export async function GET(): Promise<Response> {
   try {
-    // Ambil data langsung dari endpoint JSON kamu
-    const res = await fetch("https://versi6.vercel.app/api/sdgs9", { cache: "no-store" });
-    if (!res.ok) throw new Error(`Gagal ambil data SDG 9: ${res.status}`);
+    // 🌐 Gunakan environment variable di Vercel
+    const baseUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+    // Fetch data JSON SDG 9 langsung dari endpoint publik
+    const res = await fetch(`${baseUrl}/api/sdgs9`, { cache: "no-store" });
+    if (!res.ok)
+      throw new Error(`Gagal ambil data SDG 9 dari ${baseUrl}: ${res.status}`);
     const data = await res.json();
 
+    // 🧮 Fungsi penilaian kategorik
     function categoryScore(key: string, value: any): number {
       if (!value) return 0;
       const v = String(value).toLowerCase();
@@ -39,11 +45,11 @@ export async function GET(): Promise<Response> {
       }
     }
 
-    // Hitung keberhasilan SDG 9 dari JSON
+    // 🔢 Hitung rata-rata skor per desa
     const totalScores: number[] = [];
 
     for (const row of data) {
-      const scores: number[] = [
+      const scores = [
         categoryScore("jalan_utama", row["Jenis Permukaan Jalan Utama"]),
         categoryScore(
           "akses_desa",
