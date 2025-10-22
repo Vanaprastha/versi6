@@ -31,23 +31,23 @@ const SDG_COLORS: Record<number, string> = {
 };
 
 const SDG_ICONS: Record<number, JSX.Element> = {
-  1: <Users size={22} />,
-  2: <HeartPulse size={22} />,
-  3: <Shield size={22} />,
-  4: <GraduationCap size={22} />,
-  5: <Users size={22} />,
-  6: <Droplets size={22} />,
-  7: <Sun size={22} />,
-  8: <BriefcaseBusiness size={22} />,
-  9: <Factory size={22} />,
-  10: <Handshake size={22} />,
-  11: <Building2 size={22} />,
-  12: <Recycle size={22} />,
-  13: <Leaf size={22} />,
-  14: <Waves size={22} />,
-  15: <Trees size={22} />,
-  16: <Sparkles size={22} />,
-  17: <Globe size={22} />,
+  1: <Users size={22} />,             // Tanpa Kemiskinan
+  2: <HeartPulse size={22} />,        // Tanpa Kelaparan
+  3: <Shield size={22} />,            // Kesehatan
+  4: <GraduationCap size={22} />,     // Pendidikan
+  5: <Users size={22} />,             // Gender
+  6: <Droplets size={22} />,          // Air Bersih
+  7: <Sun size={22} />,               // Energi Bersih
+  8: <BriefcaseBusiness size={22} />, // Pekerjaan Layak
+  9: <Factory size={22} />,           // Industri
+  10: <Handshake size={22} />,        // Kesenjangan
+  11: <Building2 size={22} />,        // Kota
+  12: <Recycle size={22} />,          // Konsumsi
+  13: <Leaf size={22} />,             // Iklim
+  14: <Waves size={22} />,            // Lautan
+  15: <Trees size={22} />,            // Daratan
+  16: <Sparkles size={22} />,         // Institusi
+  17: <Globe size={22} />,            // Kemitraan
 };
 
 export default function SDGCard({ goalNo, title, successPercentage }: Props) {
@@ -58,37 +58,37 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
 
   return (
     <div
-      className="relative p-4 rounded-2xl border backdrop-blur-xl shadow hover:shadow-lg cursor-pointer transition flex flex-col justify-between min-h-[150px]"
+      className="relative p-4 rounded-2xl border backdrop-blur-xl shadow hover:shadow-lg cursor-pointer transition"
       style={{ background: bg, borderColor: border }}
     >
-      {/* Ikon di pojok kanan atas */}
-      <div className="absolute top-3 right-3 text-white/90">{icon}</div>
-
-      {/* Konten utama */}
-      <div className="pr-10">
-        <h3 className="font-semibold text-white drop-shadow-md mb-3 leading-snug">
-          SDG {goalNo}: {title}
-        </h3>
-
-        {/* Progress bar */}
-        <div className="w-full bg-white/20 h-2 rounded-full overflow-hidden">
-          <div
-            className="h-2 rounded-full transition-all duration-700 ease-in-out"
-            style={{
-              width: `${successPercentage}%`,
-              backgroundColor: base,
-            }}
-          ></div>
-        </div>
-
-        {/* Persentase keberhasilan */}
-        <p className="text-sm text-gray-100 mt-2">
-          Keberhasilan:{" "}
-          <span className="font-semibold text-white">
-            {successPercentage.toFixed(1)}%
-          </span>
-        </p>
+      {/* Icon di pojok kanan atas */}
+      <div className="absolute top-3 right-3 text-white/90">
+        {icon}
       </div>
+
+      {/* Judul SDG */}
+      <h3 className="font-semibold text-white drop-shadow-md mb-3 pr-10">
+        SDG {goalNo}: {title}
+      </h3>
+
+      {/* Progress bar container */}
+      <div className="mt-2 mb-1 w-full bg-white/20 h-2 rounded-full overflow-hidden">
+        <div
+          className="h-2 rounded-full transition-all duration-700 ease-in-out"
+          style={{
+            width: `${successPercentage}%`,
+            backgroundColor: base,
+          }}
+        ></div>
+      </div>
+
+      {/* Persentase keberhasilan */}
+      <p className="text-sm text-gray-100 mt-2 pr-10">
+        Keberhasilan:{" "}
+        <span className="font-semibold text-white">
+          {successPercentage.toFixed(1)}%
+        </span>
+      </p>
     </div>
   );
 }
