@@ -30,8 +30,8 @@ function categoryScore(key: string, value: any): number {
 async function calculateSdg8Success(data: any[]): Promise<number> {
   const scores = data.map((row) => {
     const score =
-      numericScore(row["r1403a"], 2) * 0.25 +
-      numericScore(row["r1201a8"], 5) * 0.20 +
+      numericScore(row["r1403a"], 2) * 0.20 +
+      numericScore(row["r1201a8"], 2) * 0.25 +
       numericScore(row["r510b5k4"], 1) * 0.10 +
       categoryScore("r403a", row["r403a"]) * 0.20 +
       categoryScore("r1207a", row["r1207a"]) * 0.25;
