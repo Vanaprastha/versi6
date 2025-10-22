@@ -29,8 +29,6 @@ const sdgTitles: { [key: number]: string } = {
   17: "Kemitraan",
 };
 
-
-
 export default function Dashboard() {
   const [sdgData, setSdgData] = useState<SdgSuccessData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -55,9 +53,17 @@ export default function Dashboard() {
     fetchSdgSuccess();
   }, []);
 
-  if (loading) return <p>Loading SDGs...</p>;
-  if (error) return <p>Error loading SDGs: {error}</p>;
+  // ✅ Ubah bagian loading di sini
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-3xl font-bold text-white animate-pulse">
+          Loading SDGs...
+        </p>
+      </div>
+    );
 
+  if (error) return <p>Error loading SDGs: {error}</p>;
 
   return (
     <div className="space-y-6">
@@ -71,7 +77,11 @@ export default function Dashboard() {
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {sdgData.map((d) => (
           <Link key={d.goalNo} href={{ pathname: `/sdg/sdg_${d.goalNo}` }}>
-            <SDGCard goalNo={d.goalNo} title={sdgTitles[d.goalNo]} successPercentage={d.successPercentage} />
+            <SDGCard
+              goalNo={d.goalNo}
+              title={sdgTitles[d.goalNo]}
+              successPercentage={d.successPercentage}
+            />
           </Link>
         ))}
       </section>
