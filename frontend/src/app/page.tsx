@@ -9,8 +9,25 @@ interface SdgSuccessData {
   successPercentage: number;
 }
 
+// 🧭 Nama lengkap semua SDGs (1–17)
 const sdgTitles: { [key: number]: string } = {
   1: "Tanpa Kemiskinan",
+  2: "Tanpa Kelaparan",
+  3: "Kehidupan Sehat dan Sejahtera",
+  4: "Pendidikan Berkualitas",
+  5: "Kesetaraan Gender",
+  6: "Air Bersih dan Sanitasi Layak",
+  7: "Energi Bersih dan Terjangkau",
+  8: "Pekerjaan Layak dan Pertumbuhan Ekonomi",
+  9: "Industri, Inovasi, dan Infrastruktur",
+  10: "Berkurangnya Kesenjangan",
+  11: "Kota dan Permukiman yang Berkelanjutan",
+  12: "Konsumsi dan Produksi yang Bertanggung Jawab",
+  13: "Penanganan Perubahan Iklim",
+  14: "Ekosistem Lautan",
+  15: "Ekosistem Daratan",
+  16: "Perdamaian, Keadilan, dan Kelembagaan yang Tangguh",
+  17: "Kemitraan untuk Mencapai Tujuan",
 };
 
 export default function Dashboard() {
@@ -21,8 +38,9 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchSdgSuccess() {
       try {
-        const response = await fetch("/api/sdg-success");
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch("/api/sdg-success", { cache: "no-store" });
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
         const data: SdgSuccessData[] = await response.json();
         setSdgData(data);
       } catch (e: any) {
@@ -37,7 +55,9 @@ export default function Dashboard() {
   if (loading)
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-3xl font-bold text-white animate-pulse">Loading SDGs...</p>
+        <p className="text-3xl font-bold text-white animate-pulse">
+          Loading SDGs...
+        </p>
       </div>
     );
 
@@ -57,7 +77,8 @@ export default function Dashboard() {
           <Link key={d.goalNo} href={{ pathname: `/sdg/sdg_${d.goalNo}` }}>
             <SDGCard
               goalNo={d.goalNo}
-              title={sdgTitles[d.goalNo]}
+              // tampilkan nama SDG, kalau belum terdaftar tampilkan placeholder
+              title={sdgTitles[d.goalNo] || `SDG ${d.goalNo}`}
               successPercentage={d.successPercentage}
             />
           </Link>
@@ -66,3 +87,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
