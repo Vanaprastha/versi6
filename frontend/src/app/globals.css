@@ -74,3 +74,19 @@ table { width: 100%; border-collapse: collapse; }
 html.theme-dark {}
 
 .leaflet-container { background: #f7f7f7; }
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
