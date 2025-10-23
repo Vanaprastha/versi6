@@ -34,6 +34,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
 
+  // Restore visibility from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(LS_KEY);
@@ -41,6 +42,7 @@ export default function Sidebar() {
     }
   }, []);
 
+  // Save visibility state
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem(LS_KEY, visible ? "1" : "0");
@@ -49,15 +51,16 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Tombol toggle hanya di desktop */}
+      {/* Tombol toggle (desktop only) */}
       <button
         onClick={() => setVisible(!visible)}
-        className="hidden md:flex absolute left-0 top-24 z-50 h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition"
+        className="hidden md:flex absolute left-2 top-24 z-50 h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition"
         aria-label="Toggle Sidebar"
       >
         {visible ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
       </button>
 
+      {/* Sidebar (tampilan asli, hanya bisa disembunyikan) */}
       <aside
         className={`glass-2 h-screen w-64 p-4 sticky top-0 hidden md:flex flex-col rounded-2xl transform transition-all duration-300 ${
           visible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
