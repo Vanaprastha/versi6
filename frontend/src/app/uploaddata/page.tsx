@@ -13,6 +13,7 @@ export default function UploadDataPage() {
   const [sending, setSending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
+  // 🔐 Validasi sandi ke server sebelum buka form upload
   const tryOpen = async () => {
     setMessage(null);
     if (!password) return;
@@ -34,6 +35,7 @@ export default function UploadDataPage() {
     }
   };
 
+  // 📄 Parsing CSV saat file diunggah
   const handleFile = (f: File) => {
     setParsing(true);
     setMessage(null);
@@ -54,6 +56,7 @@ export default function UploadDataPage() {
     });
   };
 
+  // 🚀 Kirim data ke Supabase
   const onSubmit = async () => {
     setMessage(null);
     if (!isAuth) {
@@ -76,7 +79,7 @@ export default function UploadDataPage() {
       if (!res.ok) {
         setMessage(js?.error || `Gagal upload (status ${res.status}).`);
       } else {
-        setMessage(`Sukses! ${js.inserted ?? 0} baris diunggah ke sdgs_${sdg}.`);
+        setMessage(`✅ Sukses! ${js.inserted ?? 0} baris diunggah ke sdgs_${sdg}.`);
         setRows([]);
         setColumns([]);
         setFile(null);
@@ -88,32 +91,48 @@ export default function UploadDataPage() {
     }
   };
 
+  // ============================================================
+  // ✨ Tampilan halaman
+  // ============================================================
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">📤 Upload Data SDGs (Overwrite)</h1>
+      <h1 className="text-2xl font-semibold text-center">📤 Upload Data SDGs (Overwrite)</h1>
 
+      {/* ======================= STEP 1: SANDI ======================= */}
       {!isAuth && (
-        <div className="rounded-2xl border border-white/10 p-4 grid gap-3 max-w-lg">
-          <div className="text-sm opacity-80">Masukkan sandi untuk membuka halaman upload data.</div>
-          <input
-            type="password"
-            className="border rounded-xl px-3 py-2 bg-white/70 dark:bg-black/30 text-black dark:text-white"
-            placeholder="Sandi (UPLOAD_PASSWORD)"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button
-            onClick={tryOpen}
-            className="rounded-xl px-4 py-2 bg-black text-white disabled:opacity-50"
-            disabled={!password}
-          >
-            Buka Halaman Upload
-          </button>
+        <div className="flex items-center justify-center min-h-[70vh]">
+          <div className="rounded-2xl border border-white/10 p-6 grid gap-4 w-full max-w-md text-center bg-white/5 backdrop-blur-sm shadow-lg">
+            <div className="text-base font-medium opacity-90">
+              Masukkan sandi untuk membuka halaman upload data.
+            </div>
+
+            <input
+              type="password"
+              className="border rounded-xl px-3 py-2 text-center bg-white/70 dark:bg-black/30 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Sandi (UPLOAD_PASSWORD)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button
+              onClick={tryOpen}
+              className="rounded-xl px-5 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold transition disabled:opacity-50 mx-auto"
+              disabled={!password}
+            >
+              Buka Halaman Upload
+            </button>
+
+            {message && (
+              <div className="text-red-500 text-sm mt-2">{message}</div>
+            )}
+          </div>
         </div>
       )}
 
+      {/* ======================= STEP 2–5: UPLOAD ======================= */}
       {isAuth && (
         <div className="space-y-4">
+          {/* Select SDGs */}
           <div className="rounded-2xl border border-white/10 p-4 grid md:grid-cols-[220px_1fr] gap-4 items-center">
             <label className="text-sm font-medium">Pilih SDGs</label>
             <select
@@ -128,6 +147,7 @@ export default function UploadDataPage() {
             </select>
           </div>
 
+          {/* Upload CSV */}
           <div className="rounded-2xl border border-white/10 p-4 grid gap-3">
             <label className="text-sm font-medium">Upload CSV</label>
             <input
@@ -145,14 +165,22 @@ export default function UploadDataPage() {
             {parsing && <div className="text-sm">Parsing CSV…</div>}
           </div>
 
+          {/* Preview Data */}
           {columns.length > 0 && (
             <div className="rounded-2xl border border-white/10 p-4 overflow-auto">
-              <div className="text-sm font-semibold mb-2">Preview Data ({rows.length} baris)</div>
+              <div className="text-sm font-semibold mb-2">
+                Preview Data ({rows.length} baris)
+              </div>
               <table className="min-w-full text-sm">
                 <thead>
                   <tr>
                     {columns.map((c) => (
-                      <th key={c} className="text-left border-b px-2 py-1 whitespace-nowrap">{c}</th>
+                      <th
+                        key={c}
+                        className="text-left border-b px-2 py-1 whitespace-nowrap"
+                      >
+                        {c}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -160,18 +188,26 @@ export default function UploadDataPage() {
                   {rows.slice(0, 50).map((r, idx) => (
                     <tr key={idx} className="border-b border-white/10">
                       {columns.map((c) => (
-                        <td key={c} className="px-2 py-1 whitespace-nowrap">{String(r[c] ?? "")}</td>
+                        <td
+                          key={c}
+                          className="px-2 py-1 whitespace-nowrap"
+                        >
+                          {String(r[c] ?? "")}
+                        </td>
                       ))}
                     </tr>
                   ))}
                 </tbody>
               </table>
               {rows.length > 50 && (
-                <div className="text-xs opacity-70 mt-2">Menampilkan 50 baris pertama dari {rows.length}.</div>
+                <div className="text-xs opacity-70 mt-2">
+                  Menampilkan 50 baris pertama dari {rows.length}.
+                </div>
               )}
             </div>
           )}
 
+          {/* Tombol Kirim */}
           <div className="flex gap-3">
             <button
               onClick={onSubmit}
@@ -184,8 +220,7 @@ export default function UploadDataPage() {
           </div>
         </div>
       )}
-      {message && (<div className="text-red-500 text-sm mt-2">{message}</div>)}
-
     </div>
   );
 }
+
