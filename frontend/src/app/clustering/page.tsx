@@ -35,7 +35,7 @@ export default function ClusteringPage() {
       <select
         value={goal}
         onChange={(e) => setGoal(Number(e.target.value))}
-        className="mb-4 p-2 rounded bg-neutral-800 text-[var(--text)]"
+        className="mb-4 p-2 rounded bg-neutral-800 text-white"
       >
         {sdgOptions.map((o) => (
           <option key={o.value} value={o.value}>

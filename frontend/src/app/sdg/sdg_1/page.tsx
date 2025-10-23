@@ -62,7 +62,7 @@ export default function SDG1Page() {
   const CustomTooltipSKTM = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           <p>Jumlah SKTM: {payload[0].value}</p>
         </div>
@@ -86,7 +86,7 @@ export default function SDG1Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -152,11 +152,11 @@ export default function SDG1Page() {
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={dataSDG1}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
-              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
-              <YAxis stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
-              <Tooltip content={<CustomTooltipSKTM  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
-              <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
+              <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
+              <Tooltip content={<CustomTooltipSKTM />} />
+              <Legend />
               <Bar
                 dataKey="jumlah surat keterangan miskin diterbitkan"
                 fill="#ef4444"
@@ -206,8 +206,8 @@ export default function SDG1Page() {
                           return <Cell key={i} fill={fillColor} />;
                         })}
                       </Pie>
-                      <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
-                      <Tooltip content={<CustomTooltip  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
+                      <Legend />
+                      <Tooltip content={<CustomTooltip />} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>

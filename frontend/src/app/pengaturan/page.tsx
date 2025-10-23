@@ -120,7 +120,7 @@ export default function PengaturanPage() {
         <div className="grid sm:grid-cols-3 gap-4">
           <button
             onClick={() => setPendingBg("")}
-            className="glass-2 rounded-lg p-3 text-left hover:opacity-90 "
+            className="glass-2 rounded-lg p-3 text-left hover:opacity-90 transition"
           >
             <p className="font-medium">Default</p>
             <p className="text-xs opacity-70">Gunakan background bawaan</p>
@@ -128,7 +128,7 @@ export default function PengaturanPage() {
 
           <button
             onClick={() => setPendingBg("https://images.unsplash.com/photo-1503264116251-35a269479413?w=1600")}
-            className="glass-2 rounded-lg p-3 text-left hover:opacity-90 "
+            className="glass-2 rounded-lg p-3 text-left hover:opacity-90 transition"
           >
             <p className="font-medium">Pemandangan</p>
             <p className="text-xs opacity-70">gambar online (Unsplash)</p>
@@ -155,14 +155,14 @@ export default function PengaturanPage() {
         <button
           id="btn-terapkan"
           onClick={applySettings}
-          className="px-4 py-2 rounded-lg bg-emerald-500/90 hover:bg-emerald-500  text-black font-medium"
+          className="px-4 py-2 rounded-lg bg-emerald-500/90 hover:bg-emerald-500 transition text-black font-medium"
           aria-label="Terapkan pengaturan tema & background"
         >
           Terapkan
         </button>
         <button
           onClick={() => { setPendingTheme(appliedTheme); setPendingBg(appliedBg); }}
-          className="px-4 py-2 rounded-lg glass-2 hover:opacity-90 "
+          className="px-4 py-2 rounded-lg glass-2 hover:opacity-90 transition"
         >
           Kembalikan ke setelan awal
         </button>

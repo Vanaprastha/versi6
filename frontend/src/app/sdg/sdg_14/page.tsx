@@ -53,7 +53,7 @@ export default function SDG14Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -104,8 +104,8 @@ export default function SDG14Page() {
                   />
                 ))}
               </Pie>
-              <Legend verticalAlign="bottom" layout="horizontal" align="center"  wrapperStyle={{ color: "var(--text)" }} />
-              <Tooltip content={<CustomTooltipPie  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
+              <Legend verticalAlign="bottom" layout="horizontal" align="center" />
+              <Tooltip content={<CustomTooltipPie />} />
             </PieChart>
           </ResponsiveContainer>
         </div>

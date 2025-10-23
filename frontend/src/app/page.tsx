@@ -56,7 +56,7 @@ export default function Dashboard() {
   if (loading)
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-3xl font-bold text-[var(--text)] animate-pulse">
+        <p className="text-3xl font-bold text-white animate-pulse">
           Loading SDGs...
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function Dashboard() {
     <div className="space-y-6">
       <header className="glass-2 p-4 rounded-2xl sticky top-0 z-10">
         <h1 className="text-xl font-semibold drop-shadow-md">Ringkasan SDGs</h1>
-        <p className="text-sm text-[var(--text)]/80">
+        <p className="text-sm text-neutral-200/80">
           Pilih wilayah & indikator untuk melihat perkembangan.
         </p>
       </header>

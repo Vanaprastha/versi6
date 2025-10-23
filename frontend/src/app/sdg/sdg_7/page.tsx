@@ -40,7 +40,7 @@ export default function SDG7Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -61,7 +61,7 @@ export default function SDG7Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -102,11 +102,11 @@ export default function SDG7Page() {
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
-              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
-              <YAxis stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
-              <Tooltip content={<CustomTooltipBar  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
-              <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
+              <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
+              <Tooltip content={<CustomTooltipBar />} />
+              <Legend />
 
               <Bar dataKey="Jumlah Keluarga Tanpa Listrik" fill="#ef4444">
                 <LabelList dataKey="Jumlah Keluarga Tanpa Listrik" position="top" fill="#fff" />
@@ -166,8 +166,8 @@ export default function SDG7Page() {
                           />
                         ))}
                       </Pie>
-                      <Legend verticalAlign="bottom" layout="horizontal" align="center"  wrapperStyle={{ color: "var(--text)" }} />
-                      <Tooltip content={<CustomTooltipPie  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
+                      <Legend verticalAlign="bottom" layout="horizontal" align="center" />
+                      <Tooltip content={<CustomTooltipPie />} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>

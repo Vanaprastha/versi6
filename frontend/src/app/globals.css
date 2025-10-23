@@ -1,120 +1,76 @@
 @import "tailwindcss";
 
-/* ===============================
-   Design tokens (default: DARK)
-   =============================== */
 :root {
-  --bg: #0b0f1a;
-  --bg-soft: #0f1524;
-  --card: rgba(255,255,255,0.06);
-  --chip: rgba(255,255,255,0.12);
-  --border: rgba(255,255,255,0.14);
-  --text: #e6e6e6;
-  --text-muted: #cfcfcf;
-  --overlay: rgba(0,0,0,.28);
-  --ring: rgba(255,255,255,.25);
-  --bg-image: url("/assets/background.webp");
-
-  /* SDG brand colors */
-  --sdg1:  #e5243b;
-  --sdg2:  #dda63a;
-  --sdg3:  #4c9f38;
-  --sdg4:  #c5192d;
-  --sdg5:  #ff3a21;
-  --sdg6:  #26bde2;
-  --sdg7:  #fcc30b;
-  --sdg8:  #a21942;
-  --sdg9:  #fd6925;
-  --sdg10: #dd1367;
-  --sdg11: #fd9d24;
-  --sdg12: #bf8b2e;
-  --sdg13: #3f7e44;
-  --sdg14: #0a97d9;
-  --sdg15: #56c02b;
-  --sdg16: #00689d;
-  --sdg17: #19486a;
+  /* Theme variables (default: dark-ish) */
+  --text-color: #e5e5e5;
+  --overlay: rgba(0,0,0,.25);
+  --glass-bg-1: rgba(0,0,0,0.22);
+  --glass-bg-2: rgba(0,0,0,0.28);
+  --glass-bg-3: rgba(0,0,0,0.34);
+  --glass-bg-4: rgba(0,0,0,0.40);
+  --glass-border: rgba(255,255,255,0.10);
+  --bg-url: url("/assets/background.webp");
 }
 
-/* ===============================
-   LIGHT overrides (active via <html class="theme-light">)
-   =============================== */
+/* Light theme overrides (toggle with .theme-light on <html>) */
 html.theme-light {
-  --bg: #f9fafb;       /* slate-50 */
-  --bg-soft: #ffffff;
-  --card: rgba(255,255,255,0.72);
-  --chip: rgba(255,255,255,0.9);
-  --border: #e5e7eb;   /* slate-200 */
-  --text: #111827;     /* slate-900 */
-  --text-muted: #4b5563; /* slate-600 */
-  --overlay: rgba(255,255,255,0); /* no dark overlay */
-  --ring: rgba(17,24,39,.12);
+  --text-color: #111111;
+  --overlay: rgba(255,255,255,.06);
+  --glass-bg-1: rgba(255,255,255,0.35);
+  --glass-bg-2: rgba(255,255,255,0.42);
+  --glass-bg-3: rgba(255,255,255,0.50);
+  --glass-bg-4: rgba(255,255,255,0.58);
+  --glass-border: rgba(0,0,0,0.10);
 }
 
-html, body { height: 100%; }
-body {
-  color: var(--text);
-  background:
-    linear-gradient(0deg, var(--overlay), var(--overlay)),
-    var(--bg);
+body { color: var(--text-color); }
+.glass-1 { background: var(--glass-bg-1); backdrop-filter: blur(6px); border: 1px solid var(--glass-border); }
+.glass-2 { background: var(--glass-bg-2); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); }
+.glass-3 { background: var(--glass-bg-3); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
+.glass-4 { background: var(--glass-bg-4); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
+
+
+:root { color-scheme: dark; }
+body { @apply text-neutral-100; }
+
+/* Glassmorphism (gelap agar kontras) */
+.glass-1 { @apply bg-black/40 backdrop-blur-md border border-white/10; }
+.glass-2 { @apply bg-black/50 backdrop-blur-lg border border-white/10; }
+.glass-3 { @apply bg-black/55 backdrop-blur-xl border border-white/10; }
+.glass-4 { @apply bg-black/60 backdrop-blur-2xl border border-white/10; }
+
+/* Background helper */
+.bg-dashboard {
+  background-image: var(--bg-url, url("/assets/background.webp"));
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Glass utilities (light-weight, formal) */
-.glass-1 { background: var(--card); border: 1px solid var(--border); backdrop-filter: blur(10px); }
-.glass-2 { background: rgba(255,255,255,0.78); border: 1px solid var(--border); backdrop-filter: blur(14px); }
-.glass-3 { background: rgba(255,255,255,0.86); border: 1px solid var(--border); backdrop-filter: blur(18px); }
-.glass-4 { background: rgba(255,255,255,0.92); border: 1px solid var(--border); backdrop-filter: blur(22px); }
-
-/* Chip / pill */
-.chip { background: #f3f4f6; border: 1px solid var(--border); color: var(--text); }
-
-/* Card base */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+/* Overlay untuk meningkatkan keterbacaan */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  pointer-events: none;
+  z-index: -1;
 }
 
-/* SDG accent helpers (usage: class="sdg sdg-1") */
-.sdg { position: relative; }
-.sdg-1 { --sdg: var(--sdg1); }
-.sdg-2 { --sdg: var(--sdg2); }
-.sdg-3 { --sdg: var(--sdg3); }
-.sdg-4 { --sdg: var(--sdg4); }
-.sdg-5 { --sdg: var(--sdg5); }
-.sdg-6 { --sdg: var(--sdg6); }
-.sdg-7 { --sdg: var(--sdg7); }
-.sdg-8 { --sdg: var(--sdg8); }
-.sdg-9 { --sdg: var(--sdg9); }
-.sdg-10 { --sdg: var(--sdg10); }
-.sdg-11 { --sdg: var(--sdg11); }
-.sdg-12 { --sdg: var(--sdg12); }
-.sdg-13 { --sdg: var(--sdg13); }
-.sdg-14 { --sdg: var(--sdg14); }
-.sdg-15 { --sdg: var(--sdg15); }
-.sdg-16 { --sdg: var(--sdg16); }
-.sdg-17 { --sdg: var(--sdg17); }
 
-/* Accent usage examples */
-.accent-border { border-color: var(--sdg) !important; }
-.accent-bg-soft { background: color-mix(in oklab, var(--sdg) 10%, white); }
-.accent-text { color: var(--sdg); }
+/* Responsive media */
+img, svg, canvas, video { max-width: 100%; height: auto; }
 
-/* Links */
-a { color: inherit; }
-a:hover { text-decoration: underline; }
-
-/* Scrollbar */
+/* Hide scrollbar utility for mobile nav */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Table */
+/* Make tables horizontally scrollable by default */
 table { width: 100%; border-collapse: collapse; }
-th, td { border-bottom: 1px solid var(--border); padding: .625rem .75rem; }
-thead th { background: #f3f4f6; color: #111827; }
+.table-container { overflow-x: auto; }
 
-/* Map */
+
+/* Explicit dark theme hook (variables default already dark) */
+html.theme-dark {}
+
 .leaflet-container { background: #f7f7f7; }
-
-/* Disable animation globally (keep it light & formal) */
-* { transition: none !important; animation: none !important; }
