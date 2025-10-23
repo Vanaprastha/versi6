@@ -12,7 +12,7 @@ import { RiRobot2Line } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
 import { BsInfoCircle } from "react-icons/bs";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 type NavItem = {
   href: Route;
@@ -49,16 +49,6 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Tombol toggle di tengah layar, simetris secara vertikal */}
-      <button
-        onClick={() => setVisible(!visible)}
-        className={`hidden md:flex fixed z-50 top-1/2 -translate-y-1/2 h-9 w-9 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition 
-        ${visible ? "left-[260px]" : "left-3"}`}
-        aria-label="Toggle Sidebar"
-      >
-        {visible ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
-      </button>
-
       {/* Sidebar */}
       <aside
         className={`glass-2 h-screen w-64 p-4 top-0 hidden md:flex flex-col rounded-2xl transition-all duration-300 ease-in-out z-40
@@ -95,6 +85,15 @@ export default function Sidebar() {
           © {new Date().getFullYear()} Pemerintah Daerah Kecamatan Wates
         </p>
       </aside>
+
+      {/* Tombol hamburger di pojok kiri atas dalam konten utama */}
+      <button
+        onClick={() => setVisible(!visible)}
+        className="hidden md:flex absolute top-5 left-5 z-50 h-10 w-10 items-center justify-center rounded-xl bg-white/80 text-neutral-800 shadow hover:bg-white transition"
+        aria-label="Toggle Sidebar"
+      >
+        {visible ? <X size={22} /> : <Menu size={22} />}
+      </button>
     </>
   );
 }
