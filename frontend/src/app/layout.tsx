@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import DesktopSidebar from "@/components/DesktopSidebar";
+import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="max-w-[1440px] mx-auto p-4">
           <div className="flex flex-col md:flex-row gap-4 min-h-screen">
             <div className="md:hidden"><MobileNav /></div>
-            <DesktopSidebar />
+            <Sidebar />
             <main className="flex-1 glass-1 min-h-[70vh] md:h-screen overflow-y-auto p-4 rounded-2xl">
               {children}
             </main>
