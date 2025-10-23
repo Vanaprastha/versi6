@@ -44,11 +44,11 @@ export default function Revenue() {
     <div style={{ width: "100%", height: 280 }}>
       <ResponsiveContainer>
         <LineChart data={data} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis tick={{ fill: "var(--text)" }} stroke="var(--border)"  />
+          <CartesianGrid strokeDasharray="3 3"  stroke="#e5e7eb" />
+          <XAxis dataKey="name"  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+          <YAxis tick={{ fill: "var(--text)" }} stroke="var(--border)"   tick={{ fill: "var(--text)" }} stroke="var(--border)" />
           <Tooltip
-            content={<CustomTooltip />}
+            content={<CustomTooltip  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />}
             cursor={{ stroke: "rgba(255,255,255,0.25)", strokeWidth: 1 }}
           />
           <Line

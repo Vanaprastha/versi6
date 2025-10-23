@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; text: string };
@@ -47,13 +46,13 @@ export default function TanyaSDGsPage() {
       <div className="glass-4 border rounded-2xl p-6 h-[70vh] overflow-y-auto space-y-4">
         <AnimatePresence>
           {logs.map((m, i) => (
-            <motion.div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+            <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
               <div className={`px-5 py-3 rounded-2xl ${m.role === "user" ? "bg-blue-600 text-[var(--text)]" : "bg-green-100 text-green-900"}`}>
                 <b>{m.role === "user" ? "Kamu" : "SDGsBot"}:</b>{" "}
                 {/* @ts-expect-error react-markdown typing issue */}
                 <ReactMarkdown>{m.text}</ReactMarkdown>
               </div>
-            </motion.div>
+            </div>
           ))}
         </AnimatePresence>
         {loading && <div className="italic animate-pulse text-emerald-300">SDGsBot sedang mengetik…</div>}

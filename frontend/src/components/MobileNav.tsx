@@ -22,7 +22,7 @@ export default function MobileNav() {
             <li key={it.href}>
               <Link
                 href={it.href}
-                className={`px-3 py-2 rounded-xl text-sm whitespace-nowrap transition
+                className={`px-3 py-2 rounded-xl text-sm whitespace-nowrap 
                   ${active ? "chip" : "chip hover:chip"}`}
               >
                 {it.label}

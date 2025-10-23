@@ -152,11 +152,11 @@ export default function SDG1Page() {
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={dataSDG1}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
-              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
-              <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
-              <Tooltip content={<CustomTooltipSKTM />} />
-              <Legend wrapperStyle={{ color: "var(--text)" }}  />
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <YAxis stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <Tooltip content={<CustomTooltipSKTM  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
+              <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
               <Bar
                 dataKey="jumlah surat keterangan miskin diterbitkan"
                 fill="#ef4444"
@@ -206,8 +206,8 @@ export default function SDG1Page() {
                           return <Cell key={i} fill={fillColor} />;
                         })}
                       </Pie>
-                      <Legend wrapperStyle={{ color: "var(--text)" }}  />
-                      <Tooltip content={<CustomTooltip />} />
+                      <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
+                      <Tooltip content={<CustomTooltip  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>

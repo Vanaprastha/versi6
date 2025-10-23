@@ -2,7 +2,6 @@
 
 /* ===============================
    Design tokens (default: DARK)
-   Switch to LIGHT by setting <html class="theme-light">
    =============================== */
 :root {
   --bg: #0b0f1a;
@@ -15,39 +14,91 @@
   --overlay: rgba(0,0,0,.28);
   --ring: rgba(255,255,255,.25);
   --bg-image: url("/assets/background.webp");
+
+  /* SDG brand colors */
+  --sdg1:  #e5243b;
+  --sdg2:  #dda63a;
+  --sdg3:  #4c9f38;
+  --sdg4:  #c5192d;
+  --sdg5:  #ff3a21;
+  --sdg6:  #26bde2;
+  --sdg7:  #fcc30b;
+  --sdg8:  #a21942;
+  --sdg9:  #fd6925;
+  --sdg10: #dd1367;
+  --sdg11: #fd9d24;
+  --sdg12: #bf8b2e;
+  --sdg13: #3f7e44;
+  --sdg14: #0a97d9;
+  --sdg15: #56c02b;
+  --sdg16: #00689d;
+  --sdg17: #19486a;
 }
 
-/* LIGHT overrides */
+/* ===============================
+   LIGHT overrides (active via <html class="theme-light">)
+   =============================== */
 html.theme-light {
-  --bg: #f7fafc;           /* neutral-50-ish */
+  --bg: #f9fafb;       /* slate-50 */
   --bg-soft: #ffffff;
-  --card: rgba(0,0,0,0.04); /* glass kartu */
-  --chip: rgba(0,0,0,0.06); /* chip/ pill nav */
-  --border: rgba(0,0,0,0.08);
-  --text: #111827;         /* neutral-900 */
-  --text-muted: #4b5563;   /* neutral-600 */
-  --overlay: rgba(255,255,255,0); /* hapus selubung gelap */
-  --ring: rgba(17,24,39,.15);
+  --card: rgba(255,255,255,0.72);
+  --chip: rgba(255,255,255,0.9);
+  --border: #e5e7eb;   /* slate-200 */
+  --text: #111827;     /* slate-900 */
+  --text-muted: #4b5563; /* slate-600 */
+  --overlay: rgba(255,255,255,0); /* no dark overlay */
+  --ring: rgba(17,24,39,.12);
 }
 
-/* Base layout */
 html, body { height: 100%; }
 body {
   color: var(--text);
   background:
     linear-gradient(0deg, var(--overlay), var(--overlay)),
-    var(--bg-image) center / cover no-repeat fixed,
     var(--bg);
 }
 
-/* Glass utilities */
+/* Glass utilities (light-weight, formal) */
 .glass-1 { background: var(--card); border: 1px solid var(--border); backdrop-filter: blur(10px); }
-.glass-2 { background: color-mix(in oklab, var(--card) 70%, transparent); border: 1px solid var(--border); backdrop-filter: blur(14px); }
-.glass-3 { background: color-mix(in oklab, var(--card) 85%, transparent); border: 1px solid var(--border); backdrop-filter: blur(18px); }
-.glass-4 { background: color-mix(in oklab, var(--card) 92%, transparent); border: 1px solid var(--border); backdrop-filter: blur(22px); }
+.glass-2 { background: rgba(255,255,255,0.78); border: 1px solid var(--border); backdrop-filter: blur(14px); }
+.glass-3 { background: rgba(255,255,255,0.86); border: 1px solid var(--border); backdrop-filter: blur(18px); }
+.glass-4 { background: rgba(255,255,255,0.92); border: 1px solid var(--border); backdrop-filter: blur(22px); }
 
-/* Chips / badges */
-.chip { background: var(--chip); border: 1px solid var(--border); }
+/* Chip / pill */
+.chip { background: #f3f4f6; border: 1px solid var(--border); color: var(--text); }
+
+/* Card base */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* SDG accent helpers (usage: class="sdg sdg-1") */
+.sdg { position: relative; }
+.sdg-1 { --sdg: var(--sdg1); }
+.sdg-2 { --sdg: var(--sdg2); }
+.sdg-3 { --sdg: var(--sdg3); }
+.sdg-4 { --sdg: var(--sdg4); }
+.sdg-5 { --sdg: var(--sdg5); }
+.sdg-6 { --sdg: var(--sdg6); }
+.sdg-7 { --sdg: var(--sdg7); }
+.sdg-8 { --sdg: var(--sdg8); }
+.sdg-9 { --sdg: var(--sdg9); }
+.sdg-10 { --sdg: var(--sdg10); }
+.sdg-11 { --sdg: var(--sdg11); }
+.sdg-12 { --sdg: var(--sdg12); }
+.sdg-13 { --sdg: var(--sdg13); }
+.sdg-14 { --sdg: var(--sdg14); }
+.sdg-15 { --sdg: var(--sdg15); }
+.sdg-16 { --sdg: var(--sdg16); }
+.sdg-17 { --sdg: var(--sdg17); }
+
+/* Accent usage examples */
+.accent-border { border-color: var(--sdg) !important; }
+.accent-bg-soft { background: color-mix(in oklab, var(--sdg) 10%, white); }
+.accent-text { color: var(--sdg); }
 
 /* Links */
 a { color: inherit; }
@@ -57,12 +108,13 @@ a:hover { text-decoration: underline; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Tables */
+/* Table */
 table { width: 100%; border-collapse: collapse; }
-.table-container { overflow-x: auto; }
+th, td { border-bottom: 1px solid var(--border); padding: .625rem .75rem; }
+thead th { background: #f3f4f6; color: #111827; }
 
 /* Map */
 .leaflet-container { background: #f7f7f7; }
 
-/* Support for dark hook if needed */
-html.theme-dark {}
+/* Disable animation globally (keep it light & formal) */
+* { transition: none !important; animation: none !important; }

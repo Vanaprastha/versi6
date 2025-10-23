@@ -134,10 +134,10 @@ export default function SDG16Page() {
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
-              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
-              <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
-              <Tooltip content={<CustomTooltipBar />} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <YAxis stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <Tooltip content={<CustomTooltipBar  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
               <Bar dataKey="Jumlah jenis lembaga adat" fill="#3b82f6">
                 <LabelList dataKey="Jumlah jenis lembaga adat" position="top" fill="#fff" />
               </Bar>
@@ -176,8 +176,8 @@ export default function SDG16Page() {
                         />
                       ))}
                     </Pie>
-                    <Legend verticalAlign="bottom" layout="horizontal" align="center" />
-                    <Tooltip content={<CustomTooltipPie />} />
+                    <Legend verticalAlign="bottom" layout="horizontal" align="center"  wrapperStyle={{ color: "var(--text)" }} />
+                    <Tooltip content={<CustomTooltipPie  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>

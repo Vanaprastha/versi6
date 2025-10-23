@@ -104,8 +104,8 @@ export default function SDG14Page() {
                   />
                 ))}
               </Pie>
-              <Legend verticalAlign="bottom" layout="horizontal" align="center" />
-              <Tooltip content={<CustomTooltipPie />} />
+              <Legend verticalAlign="bottom" layout="horizontal" align="center"  wrapperStyle={{ color: "var(--text)" }} />
+              <Tooltip content={<CustomTooltipPie  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
             </PieChart>
           </ResponsiveContainer>
         </div>

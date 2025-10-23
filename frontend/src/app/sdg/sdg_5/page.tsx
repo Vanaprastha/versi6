@@ -103,11 +103,11 @@ export default function SDG5Page() {
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
-              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
-              <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
-              <Tooltip content={<CustomTooltip />} />
-              <Legend wrapperStyle={{ color: "var(--text)" }}  />
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <YAxis stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <Tooltip content={<CustomTooltip  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
+              <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
               {indikator.map((ind, idx) => (
                 <Bar key={idx} dataKey={ind.key} fill={ind.color}>
                   <LabelList dataKey={ind.key} position="top" fill="#fff" />
@@ -128,7 +128,7 @@ export default function SDG5Page() {
               <div className="w-full h-72">
                 <ResponsiveContainer>
                   <BarChart data={data} margin={{ bottom: 40 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
                     <XAxis
                       dataKey="nama_desa"
                       stroke="#fff"
@@ -137,9 +137,9 @@ export default function SDG5Page() {
                       textAnchor="end"
                       interval={0}
                       height={60}
-                    />
-                    <YAxis stroke="#fff" tick={{ fill: "#fff", fontSize: 10 }} />
-                    <Tooltip content={<CustomTooltip />} />
+                     tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+                    <YAxis stroke="#fff" tick={{ fill: "#fff", fontSize: 10 }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+                    <Tooltip content={<CustomTooltip  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
                     <Bar dataKey={ind.key} fill={ind.color} radius={[6, 6, 0, 0]}>
                       <LabelList dataKey={ind.key} position="top" fill="#fff" />
                     </Bar>

@@ -113,11 +113,11 @@ export default function SDG3Page() {
         <div className="w-full h-96">
           <ResponsiveContainer>
             <BarChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30" />
-              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
-              <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
-              <Tooltip content={<CustomTooltipBar />} />
-              <Legend wrapperStyle={{ color: "var(--text)" }}  />
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff30"  stroke="#e5e7eb" />
+              <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <YAxis stroke="#fff" tick={{ fill: "#fff" }}  tick={{ fill: "var(--text)" }} stroke="var(--border)" />
+              <Tooltip content={<CustomTooltipBar  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
+              <Legend wrapperStyle={{ color: "var(--text)" }}   wrapperStyle={{ color: "var(--text)" }} />
               <Bar
                 dataKey="Jumlah Puskesmas dengan sarana Rawat Inap"
                 fill="#ef4444"
@@ -188,8 +188,8 @@ export default function SDG3Page() {
                         layout="horizontal"
                         align="center"
                         wrapperStyle={{ marginTop: "20px" }}
-                      />
-                      <Tooltip content={<CustomTooltipPie />} />
+                       wrapperStyle={{ color: "var(--text)" }} />
+                      <Tooltip content={<CustomTooltipPie  contentStyle={{ background: "var(--bg-soft)", borderColor: "var(--border)", color: "var(--text)" }} />} />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>

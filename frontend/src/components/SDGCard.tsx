@@ -58,7 +58,7 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
 
   return (
     <div
-      className="relative p-4 rounded-2xl border backdrop-blur-xl shadow hover:shadow-lg cursor-pointer transition"
+      className="backdrop-blur-xl border card cursor-pointer glass-3 hover:shadow-lg p-4 relative rounded-2xl shadow text-[var(--text)] "
       style={{ background: bg, borderColor: border }}
     >
       {/* Icon di pojok kanan atas */}
@@ -74,7 +74,7 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
       {/* Progress bar container */}
       <div className="mt-2 mb-1 w-full chip h-2 rounded-full overflow-hidden">
         <div
-          className="h-2 rounded-full transition-all duration-700 ease-in-out"
+          className="h-2 rounded-full   -out"
           style={{
             width: `${successPercentage}%`,
             backgroundColor: base,

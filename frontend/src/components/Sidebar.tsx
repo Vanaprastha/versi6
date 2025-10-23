@@ -29,7 +29,7 @@ const items = [
 export default function Sidebar() {
   const pathname = usePathname();
   return (
-    <aside className="glass-2 h-screen w-64 p-4 sticky top-0 hidden md:flex flex-col rounded-2xl">
+    <aside className="chip flex-col glass-2 glass-3 h-screen hidden md:flex p-4 rounded-2xl sticky text-[var(--text)] top-0 w-64">
       <div className="flex items-center gap-3 pb-4 border-b border-white/10">
         <Image src="/logo-pemda.png" alt="Logo Pemda" width={36} height={36} />
         <div className="text-sm">
@@ -46,7 +46,7 @@ export default function Sidebar() {
               key={it.href}
               href={it.href}
               aria-current={active ? "page" : undefined}
-              className={`flex items-center gap-3 px-3 py-2 rounded-xl transition ${
+              className={`flex items-center gap-3 px-3 py-2 rounded-xl  ${
                 active ? "chip" : "hover:bg-white/5"
               }`}
             >
