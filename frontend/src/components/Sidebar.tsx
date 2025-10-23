@@ -34,7 +34,7 @@ export default function Sidebar() {
         <Image src="/logo-pemda.png" alt="Logo Pemda" width={36} height={36} />
         <div className="text-sm">
           <p className="font-semibold">Dashboard SDGs</p>
-          <p className="text-neutral-300">Pemerintah Daerah Kecamatan Wates</p>
+          <p className="text-[var(--text)]">Pemerintah Daerah Kecamatan Wates</p>
         </div>
       </div>
 
@@ -47,7 +47,7 @@ export default function Sidebar() {
               href={it.href}
               aria-current={active ? "page" : undefined}
               className={`flex items-center gap-3 px-3 py-2 rounded-xl transition ${
-                active ? "bg-white/10" : "hover:bg-white/5"
+                active ? "chip" : "hover:bg-white/5"
               }`}
             >
               <span className="text-lg opacity-80">{it.icon}</span>
@@ -57,7 +57,7 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <p className="text-[11px] text-neutral-400">
+      <p className="text-[11px] text-[var(--text-muted)]">
         © {new Date().getFullYear()} Pemerintah Daerah Kecamatan Wates
       </p>
     </aside>

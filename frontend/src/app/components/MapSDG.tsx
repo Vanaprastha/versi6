@@ -86,7 +86,7 @@ export default function MapSDG({ goal }: Props) {
   return (
     <div style={{ position: "relative" }}>
       {loading && (
-        <div className="mb-2 text-sm text-neutral-400">
+        <div className="mb-2 text-sm text-[var(--text-muted)]">
           Memuat peta SDGs {goal}…
         </div>
       )}

@@ -43,7 +43,7 @@ export default function SDG5Page() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -107,7 +107,7 @@ export default function SDG5Page() {
               <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
               <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
               <Tooltip content={<CustomTooltip />} />
-              <Legend />
+              <Legend wrapperStyle={{ color: "var(--text)" }}  />
               {indikator.map((ind, idx) => (
                 <Bar key={idx} dataKey={ind.key} fill={ind.color}>
                   <LabelList dataKey={ind.key} position="top" fill="#fff" />

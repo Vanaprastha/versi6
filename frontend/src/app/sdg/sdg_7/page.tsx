@@ -40,7 +40,7 @@ export default function SDG7Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -61,7 +61,7 @@ export default function SDG7Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -106,7 +106,7 @@ export default function SDG7Page() {
               <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
               <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
               <Tooltip content={<CustomTooltipBar />} />
-              <Legend />
+              <Legend wrapperStyle={{ color: "var(--text)" }}  />
 
               <Bar dataKey="Jumlah Keluarga Tanpa Listrik" fill="#ef4444">
                 <LabelList dataKey="Jumlah Keluarga Tanpa Listrik" position="top" fill="#fff" />

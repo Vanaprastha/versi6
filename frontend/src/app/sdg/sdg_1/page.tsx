@@ -62,7 +62,7 @@ export default function SDG1Page() {
   const CustomTooltipSKTM = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           <p>Jumlah SKTM: {payload[0].value}</p>
         </div>
@@ -86,7 +86,7 @@ export default function SDG1Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-black/80 text-[var(--text)] p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -156,7 +156,7 @@ export default function SDG1Page() {
               <XAxis dataKey="nama_desa" stroke="#fff" tick={{ fill: "#fff" }} />
               <YAxis stroke="#fff" tick={{ fill: "#fff" }} />
               <Tooltip content={<CustomTooltipSKTM />} />
-              <Legend />
+              <Legend wrapperStyle={{ color: "var(--text)" }}  />
               <Bar
                 dataKey="jumlah surat keterangan miskin diterbitkan"
                 fill="#ef4444"
@@ -206,7 +206,7 @@ export default function SDG1Page() {
                           return <Cell key={i} fill={fillColor} />;
                         })}
                       </Pie>
-                      <Legend />
+                      <Legend wrapperStyle={{ color: "var(--text)" }}  />
                       <Tooltip content={<CustomTooltip />} />
                     </PieChart>
                   </ResponsiveContainer>

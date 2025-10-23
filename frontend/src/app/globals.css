@@ -1,76 +1,68 @@
 @import "tailwindcss";
 
+/* ===============================
+   Design tokens (default: DARK)
+   Switch to LIGHT by setting <html class="theme-light">
+   =============================== */
 :root {
-  /* Theme variables (default: dark-ish) */
-  --text-color: #e5e5e5;
-  --overlay: rgba(0,0,0,.25);
-  --glass-bg-1: rgba(0,0,0,0.22);
-  --glass-bg-2: rgba(0,0,0,0.28);
-  --glass-bg-3: rgba(0,0,0,0.34);
-  --glass-bg-4: rgba(0,0,0,0.40);
-  --glass-border: rgba(255,255,255,0.10);
-  --bg-url: url("/assets/background.webp");
+  --bg: #0b0f1a;
+  --bg-soft: #0f1524;
+  --card: rgba(255,255,255,0.06);
+  --chip: rgba(255,255,255,0.12);
+  --border: rgba(255,255,255,0.14);
+  --text: #e6e6e6;
+  --text-muted: #cfcfcf;
+  --overlay: rgba(0,0,0,.28);
+  --ring: rgba(255,255,255,.25);
+  --bg-image: url("/assets/background.webp");
 }
 
-/* Light theme overrides (toggle with .theme-light on <html>) */
+/* LIGHT overrides */
 html.theme-light {
-  --text-color: #111111;
-  --overlay: rgba(255,255,255,.06);
-  --glass-bg-1: rgba(255,255,255,0.35);
-  --glass-bg-2: rgba(255,255,255,0.42);
-  --glass-bg-3: rgba(255,255,255,0.50);
-  --glass-bg-4: rgba(255,255,255,0.58);
-  --glass-border: rgba(0,0,0,0.10);
+  --bg: #f7fafc;           /* neutral-50-ish */
+  --bg-soft: #ffffff;
+  --card: rgba(0,0,0,0.04); /* glass kartu */
+  --chip: rgba(0,0,0,0.06); /* chip/ pill nav */
+  --border: rgba(0,0,0,0.08);
+  --text: #111827;         /* neutral-900 */
+  --text-muted: #4b5563;   /* neutral-600 */
+  --overlay: rgba(255,255,255,0); /* hapus selubung gelap */
+  --ring: rgba(17,24,39,.15);
 }
 
-body { color: var(--text-color); }
-.glass-1 { background: var(--glass-bg-1); backdrop-filter: blur(6px); border: 1px solid var(--glass-border); }
-.glass-2 { background: var(--glass-bg-2); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); }
-.glass-3 { background: var(--glass-bg-3); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
-.glass-4 { background: var(--glass-bg-4); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
-
-
-:root { color-scheme: dark; }
-body { @apply text-neutral-100; }
-
-/* Glassmorphism (gelap agar kontras) */
-.glass-1 { @apply bg-black/40 backdrop-blur-md border border-white/10; }
-.glass-2 { @apply bg-black/50 backdrop-blur-lg border border-white/10; }
-.glass-3 { @apply bg-black/55 backdrop-blur-xl border border-white/10; }
-.glass-4 { @apply bg-black/60 backdrop-blur-2xl border border-white/10; }
-
-/* Background helper */
-.bg-dashboard {
-  background-image: var(--bg-url, url("/assets/background.webp"));
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* Base layout */
+html, body { height: 100%; }
+body {
+  color: var(--text);
+  background:
+    linear-gradient(0deg, var(--overlay), var(--overlay)),
+    var(--bg-image) center / cover no-repeat fixed,
+    var(--bg);
 }
 
-/* Overlay untuk meningkatkan keterbacaan */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: var(--overlay);
-  pointer-events: none;
-  z-index: -1;
-}
+/* Glass utilities */
+.glass-1 { background: var(--card); border: 1px solid var(--border); backdrop-filter: blur(10px); }
+.glass-2 { background: color-mix(in oklab, var(--card) 70%, transparent); border: 1px solid var(--border); backdrop-filter: blur(14px); }
+.glass-3 { background: color-mix(in oklab, var(--card) 85%, transparent); border: 1px solid var(--border); backdrop-filter: blur(18px); }
+.glass-4 { background: color-mix(in oklab, var(--card) 92%, transparent); border: 1px solid var(--border); backdrop-filter: blur(22px); }
 
+/* Chips / badges */
+.chip { background: var(--chip); border: 1px solid var(--border); }
 
-/* Responsive media */
-img, svg, canvas, video { max-width: 100%; height: auto; }
+/* Links */
+a { color: inherit; }
+a:hover { text-decoration: underline; }
 
-/* Hide scrollbar utility for mobile nav */
+/* Scrollbar */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* Make tables horizontally scrollable by default */
+/* Tables */
 table { width: 100%; border-collapse: collapse; }
 .table-container { overflow-x: auto; }
 
-
-/* Explicit dark theme hook (variables default already dark) */
-html.theme-dark {}
-
+/* Map */
 .leaflet-container { background: #f7f7f7; }
+
+/* Support for dark hook if needed */
+html.theme-dark {}

@@ -62,17 +62,17 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
       style={{ background: bg, borderColor: border }}
     >
       {/* Icon di pojok kanan atas */}
-      <div className="absolute top-3 right-3 text-white/90">
+      <div className="absolute top-3 right-3 text-[var(--text)]/90">
         {icon}
       </div>
 
       {/* Judul SDG */}
-      <h3 className="font-semibold text-white drop-shadow-md mb-3 pr-10">
+      <h3 className="font-semibold text-[var(--text)] drop-shadow-md mb-3 pr-10">
         SDG {goalNo}: {title}
       </h3>
 
       {/* Progress bar container */}
-      <div className="mt-2 mb-1 w-full bg-white/20 h-2 rounded-full overflow-hidden">
+      <div className="mt-2 mb-1 w-full chip h-2 rounded-full overflow-hidden">
         <div
           className="h-2 rounded-full transition-all duration-700 ease-in-out"
           style={{
@@ -85,7 +85,7 @@ export default function SDGCard({ goalNo, title, successPercentage }: Props) {
       {/* Persentase keberhasilan */}
       <p className="text-sm text-gray-100 mt-2 pr-10">
         Keberhasilan:{" "}
-        <span className="font-semibold text-white">
+        <span className="font-semibold text-[var(--text)]">
           {successPercentage.toFixed(1)}%
         </span>
       </p>

@@ -30,7 +30,7 @@ function CustomTooltip({
 }) {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-black text-white border border-white/20 rounded-lg px-2 py-2 text-sm shadow-lg">
+      <div className="bg-black text-[var(--text)] border border-white/20 rounded-lg px-2 py-2 text-sm shadow-lg">
         <div className="font-medium">Tahun: {label}</div>
         <div className="opacity-90">Nilai: {payload[0].value}</div>
       </div>
@@ -46,7 +46,7 @@ export default function Revenue() {
         <LineChart data={data} margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
-          <YAxis />
+          <YAxis tick={{ fill: "var(--text)" }} stroke="var(--border)"  />
           <Tooltip
             content={<CustomTooltip />}
             cursor={{ stroke: "rgba(255,255,255,0.25)", strokeWidth: 1 }}
