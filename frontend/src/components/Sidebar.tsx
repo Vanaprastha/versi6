@@ -34,7 +34,6 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
 
-  // restore from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(LS_KEY);
@@ -42,7 +41,6 @@ export default function Sidebar() {
     }
   }, []);
 
-  // save to localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem(LS_KEY, visible ? "1" : "0");
@@ -51,17 +49,17 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Tombol toggle */}
+      {/* Tombol toggle di tengah layar, simetris secara vertikal */}
       <button
         onClick={() => setVisible(!visible)}
-        className={`hidden md:flex fixed z-50 top-24 h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition 
-        ${visible ? "left-[260px]" : "left-2"}`}
+        className={`hidden md:flex fixed z-50 top-1/2 -translate-y-1/2 h-9 w-9 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition 
+        ${visible ? "left-[260px]" : "left-3"}`}
         aria-label="Toggle Sidebar"
       >
-        {visible ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+        {visible ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
       </button>
 
-      {/* Sidebar (absolute saat disembunyikan agar main melebar penuh) */}
+      {/* Sidebar */}
       <aside
         className={`glass-2 h-screen w-64 p-4 top-0 hidden md:flex flex-col rounded-2xl transition-all duration-300 ease-in-out z-40
           ${visible ? "sticky translate-x-0 opacity-100" : "absolute -translate-x-full opacity-0"}`}
