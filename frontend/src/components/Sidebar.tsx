@@ -34,7 +34,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
 
-  // Restore visibility from localStorage
+  // restore from localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem(LS_KEY);
@@ -42,7 +42,7 @@ export default function Sidebar() {
     }
   }, []);
 
-  // Save visibility state
+  // save to localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem(LS_KEY, visible ? "1" : "0");
@@ -51,20 +51,20 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Tombol toggle (desktop only) */}
+      {/* Tombol toggle */}
       <button
         onClick={() => setVisible(!visible)}
-        className="hidden md:flex absolute left-2 top-24 z-50 h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition"
+        className={`hidden md:flex fixed z-50 top-24 h-8 w-8 items-center justify-center rounded-full bg-white/90 text-neutral-800 shadow hover:bg-white transition 
+        ${visible ? "left-[260px]" : "left-2"}`}
         aria-label="Toggle Sidebar"
       >
         {visible ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
       </button>
 
-      {/* Sidebar (tampilan asli, hanya bisa disembunyikan) */}
+      {/* Sidebar (absolute saat disembunyikan agar main melebar penuh) */}
       <aside
-        className={`glass-2 h-screen w-64 p-4 sticky top-0 hidden md:flex flex-col rounded-2xl transform transition-all duration-300 ${
-          visible ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
-        }`}
+        className={`glass-2 h-screen w-64 p-4 top-0 hidden md:flex flex-col rounded-2xl transition-all duration-300 ease-in-out z-40
+          ${visible ? "sticky translate-x-0 opacity-100" : "absolute -translate-x-full opacity-0"}`}
       >
         <div className="flex items-center gap-3 pb-4 border-b border-white/10">
           <Image src="/logo-pemda.png" alt="Logo Pemda" width={36} height={36} />
