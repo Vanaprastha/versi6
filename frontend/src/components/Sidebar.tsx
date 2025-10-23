@@ -9,6 +9,7 @@ import { BiScatterChart } from "react-icons/bi";
 import { RiRobot2Line } from "react-icons/ri";
 import { FiSettings } from "react-icons/fi";
 import { BsInfoCircle } from "react-icons/bs";
+import { TbUpload } from "react-icons/tb";
 import Image from "next/image";
 
 type NavItem = {
@@ -21,6 +22,7 @@ const items = [
   { href: "/" as Route,           label: "Dashboard",         icon: <AiOutlineDashboard /> },
   { href: "/clustering" as Route, label: "Clustering Wilayah",icon: <BiScatterChart /> },
   { href: "/tanyasdg" as Route,   label: "TanyaSDGs",      icon: <RiRobot2Line /> },
+    { href: "/uploaddata" as Route, label: "Upload Data", icon: <TbUpload /> },
   { href: "/pengaturan" as Route, label: "Pengaturan",        icon: <FiSettings /> },
   { href: "/tentang" as Route,    label: "Tentang",           icon: <BsInfoCircle /> },
 ] as const satisfies readonly NavItem[];
