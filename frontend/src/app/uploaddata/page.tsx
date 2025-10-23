@@ -109,7 +109,7 @@ export default function UploadDataPage() {
             <input
               type="password"
               className="border rounded-xl px-3 py-2 text-center bg-white/70 dark:bg-black/30 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="Sandi (UPLOAD_PASSWORD)"
+              placeholder="Silahkan Masukkan Sandi untuk Login"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
