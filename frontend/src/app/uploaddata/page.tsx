@@ -13,9 +13,25 @@ export default function UploadDataPage() {
   const [sending, setSending] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  const tryOpen = () => {
+  const tryOpen = async () => {
+    setMessage(null);
     if (!password) return;
-    setIsAuth(true);
+    try {
+      const res = await fetch("/api/check-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      if (res.ok) {
+        setIsAuth(true);
+      } else {
+        const js = await res.json().catch(() => ({} as any));
+        setIsAuth(false);
+        setMessage(js?.error || "❌ Sandi salah. Tidak dapat membuka halaman upload.");
+      }
+    } catch (e: any) {
+      setMessage(e?.message || "Terjadi kesalahan jaringan.");
+    }
   };
 
   const handleFile = (f: File) => {
