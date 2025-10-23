@@ -1,96 +1,53 @@
-/* ----------------------------------------------------------
-   🌈 IMPORT TAILWIND BASE, COMPONENTS, UTILITIES
----------------------------------------------------------- */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* ----------------------------------------------------------
-   🌙 DEFAULT THEME VARIABLES (dark theme by default)
----------------------------------------------------------- */
 :root {
-  color-scheme: dark;
-
-  /* Warna & efek dasar */
+  /* Theme variables (default: dark-ish) */
   --text-color: #e5e5e5;
-  --overlay: rgba(0, 0, 0, 0.25);
-
-  /* Efek glassmorphism (transparansi bertingkat) */
-  --glass-bg-1: rgba(0, 0, 0, 0.22);
-  --glass-bg-2: rgba(0, 0, 0, 0.28);
-  --glass-bg-3: rgba(0, 0, 0, 0.34);
-  --glass-bg-4: rgba(0, 0, 0, 0.40);
-  --glass-border: rgba(255, 255, 255, 0.10);
-
-  /* Background image default */
+  --overlay: rgba(0,0,0,.25);
+  --glass-bg-1: rgba(0,0,0,0.22);
+  --glass-bg-2: rgba(0,0,0,0.28);
+  --glass-bg-3: rgba(0,0,0,0.34);
+  --glass-bg-4: rgba(0,0,0,0.40);
+  --glass-border: rgba(255,255,255,0.10);
   --bg-url: url("/assets/background.webp");
 }
 
-/* ----------------------------------------------------------
-   ☀️ LIGHT THEME OVERRIDES
-   (aktif dengan class .theme-light di <html>)
----------------------------------------------------------- */
+/* Light theme overrides (toggle with .theme-light on <html>) */
 html.theme-light {
-  color-scheme: light;
-
   --text-color: #111111;
-  --overlay: rgba(255, 255, 255, 0.06);
-  --glass-bg-1: rgba(255, 255, 255, 0.35);
-  --glass-bg-2: rgba(255, 255, 255, 0.42);
-  --glass-bg-3: rgba(255, 255, 255, 0.50);
-  --glass-bg-4: rgba(255, 255, 255, 0.58);
-  --glass-border: rgba(0, 0, 0, 0.10);
+  --overlay: rgba(255,255,255,.06);
+  --glass-bg-1: rgba(255,255,255,0.35);
+  --glass-bg-2: rgba(255,255,255,0.42);
+  --glass-bg-3: rgba(255,255,255,0.50);
+  --glass-bg-4: rgba(255,255,255,0.58);
+  --glass-border: rgba(0,0,0,0.10);
 }
 
-/* ----------------------------------------------------------
-   🧍‍♂️ BODY & TEXT STYLE
----------------------------------------------------------- */
-body {
-  color: var(--text-color);
-  position: relative; /* penting agar overlay bekerja */
-  @apply text-neutral-100;
-  height: 100%;
-  overflow-x: hidden;
-}
+body { color: var(--text-color); }
+.glass-1 { background: var(--glass-bg-1); backdrop-filter: blur(6px); border: 1px solid var(--glass-border); }
+.glass-2 { background: var(--glass-bg-2); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); }
+.glass-3 { background: var(--glass-bg-3); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
+.glass-4 { background: var(--glass-bg-4); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
 
-/* ----------------------------------------------------------
-   🌫️ GLASSMORPHISM CLASSES
-   (gunakan salah satu: glass-1 ... glass-4)
----------------------------------------------------------- */
-.glass-1 {
-  background: var(--glass-bg-1);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--glass-border);
-}
-.glass-2 {
-  background: var(--glass-bg-2);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-}
-.glass-3 {
-  background: var(--glass-bg-3);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-}
-.glass-4 {
-  background: var(--glass-bg-4);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-}
 
-/* ----------------------------------------------------------
-   🖼️ BACKGROUND HELPER
----------------------------------------------------------- */
+:root { color-scheme: dark; }
+body { @apply text-neutral-100; }
+
+/* Glassmorphism (gelap agar kontras) */
+.glass-1 { @apply bg-black/40 backdrop-blur-md border border-white/10; }
+.glass-2 { @apply bg-black/50 backdrop-blur-lg border border-white/10; }
+.glass-3 { @apply bg-black/55 backdrop-blur-xl border border-white/10; }
+.glass-4 { @apply bg-black/60 backdrop-blur-2xl border border-white/10; }
+
+/* Background helper */
 .bg-dashboard {
-  background-image: var(--bg-url);
+  background-image: var(--bg-url, url("/assets/background.webp"));
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* ----------------------------------------------------------
-   🌑 OVERLAY (agar teks lebih terbaca di atas background)
----------------------------------------------------------- */
+/* Overlay untuk meningkatkan keterbacaan */
 body::before {
   content: "";
   position: fixed;
@@ -100,53 +57,20 @@ body::before {
   z-index: -1;
 }
 
-/* ----------------------------------------------------------
-   📱 RESPONSIVE & MEDIA
----------------------------------------------------------- */
-img,
-svg,
-canvas,
-video {
-  max-width: 100%;
-  height: auto;
-}
 
-/* Hilangkan scrollbar (untuk mobile nav, dll) */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+/* Responsive media */
+img, svg, canvas, video { max-width: 100%; height: auto; }
 
-/* Tabel scroll horizontal */
-.table-container {
-  overflow-x: auto;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+/* Hide scrollbar utility for mobile nav */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ----------------------------------------------------------
-   🗺️ LEAFLET MAP FIX (agar warna default terang)
----------------------------------------------------------- */
-.leaflet-container {
-  background: #f7f7f7;
-}
+/* Make tables horizontally scrollable by default */
+table { width: 100%; border-collapse: collapse; }
+.table-container { overflow-x: auto; }
 
-/* ----------------------------------------------------------
-   🧭 CUSTOM SCROLLBAR STYLE
----------------------------------------------------------- */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 
+/* Explicit dark theme hook (variables default already dark) */
+html.theme-dark {}
+
+.leaflet-container { background: #f7f7f7; }
